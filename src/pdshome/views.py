@@ -3,17 +3,22 @@ from django.shortcuts import render
 from visits.models import PageVisit
 import pathlib
 
-this_dir = pathlib.Path(__file__).resolve().parent
+this_dir = pathlib.Path(__file__).resolve().parent.parent
 
 
-def home_page_view(request, *args, **kwargs):
+def home_view(request, *args, **kwargs):
     qs = PageVisit.objects.all()
     page_qs = PageVisit.objects.filter(path=request.path)
     my_title = "Precision Data Solutions"
+    try: 
+        percentage =  int(page_qs.count() / qs.count() * 100)
+    except:
+        percentage = 0
+
     my_context = {
         "page_title": my_title,
         "page_visit_count": page_qs.count(),
-        "page_visit_percentage": int(page_qs.count() / qs.count() * 100),
+        "page_visit_percentage": percentage,
         "total_visits": qs.count(),
     }
     path = request.path
@@ -22,23 +27,28 @@ def home_page_view(request, *args, **kwargs):
     PageVisit.objects.create(path=path)
     return render(request, html_template, my_context)
 
-def about_page_view(request, *args, **kwargs):
+def about_view(request, *args, **kwargs):
     qs = PageVisit.objects.all()
     page_qs = PageVisit.objects.filter(path=request.path)
     my_title = "Precision Data Solutions"
-    html_template = "about.html"
+    try: 
+        percentage =  int(page_qs.count() / qs.count() * 100)
+    except:
+        percentage = 0
+
     my_context = {
         "page_title": my_title,
         "page_visit_count": page_qs.count(),
-        "page_visit_percentage": int(page_qs.count() / qs.count() * 100),
+        "page_visit_percentage": percentage,
         "total_visits": qs.count(),
     }
     path = request.path
 
+    html_template = "about.html"
     PageVisit.objects.create(path=path)
-    return render(request, html_template, my_context)
+    return render(request, html_template, my_context)       
 
-def test_home_page_view(request, *args, **kwargs):
+def test_home_view(request, *args, **kwargs):
     path = request.path
     print("path", path)
     my_title = "Test Home Page"
@@ -47,13 +57,13 @@ def test_home_page_view(request, *args, **kwargs):
     return render(request, html_template, my_context)
 
 
-def my_old_home_page_view(request, *args, **kwargs):
+def old_home_view(request, *args, **kwargs):
     path = request.path
     print("path", path)
     my_title = "My Page"
     my_context = {"page_title": my_title}
     html_ = ""
-    html_file_path = this_dir / "home.html"
+    html_file_path = this_dir / 'home.html'
     html_ = """
         <!DOCTYPE html>
     <html lang="en">
