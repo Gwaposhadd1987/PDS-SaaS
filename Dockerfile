@@ -49,7 +49,7 @@ RUN pip install -r /tmp/requirements.txt
 # RUN python manage.py collectstatic --noinput
 
 # set the Django default project name
-ARG PROJ_NAME="pdfhome"
+ARG PROJ_NAME="pdshome"
 
 # create a bash script to run the Django project
 # this script will execute at runtime when
