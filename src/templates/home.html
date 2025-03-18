@@ -3,7 +3,7 @@
 {% block head_title %}  {{ block.super }} Home {% endblock head_title %}
 
 {% block content %}
-    <h1> {{page_title}} </h1>
+    <h1 class="text-xl font-bold"> {{page_title}} </h1>
     <h5>This is home.html content injected into the base.html template</h5>
     <p>User: {{ request.user }}</p>
     <p>Page Visits: {{ page_visit_count }}</p>

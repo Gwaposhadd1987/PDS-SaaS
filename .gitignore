@@ -1,3 +1,9 @@
+# ignore vendor static files
+src/staticfiles/vendors
+
+# ignore local static root cdn --> i.e.  SaaS/local-cdn
+local-cdn/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -174,3 +180,4 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+.qodo
