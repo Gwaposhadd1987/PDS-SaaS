@@ -7,6 +7,7 @@ this_dir = pathlib.Path(__file__).resolve().parent.parent
 
 
 def home_view(request, *args, **kwargs):
+    print(request.user.is_authenticated, request.user)
     qs = PageVisit.objects.all()
     page_qs = PageVisit.objects.filter(path=request.path)
     my_title = "Precision Data Solutions"

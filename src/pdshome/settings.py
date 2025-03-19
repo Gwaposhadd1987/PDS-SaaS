@@ -28,8 +28,17 @@ EMAIL_USE_TLS=config('EMAIL_USE_TLS', cast=bool, default=True)
 EMAIL_USE_SSL=config('EMAIL_USE_SSL', cast=bool, default=False) # use MAIL_PORT 465 for SSL
 
 # Useful for 500 erros
-ADMINS=[('Shadd', 'watson.shadd@gmail.com')]
-MANAGERS=ADMINS
+ADMIN_USER_NAME=config("ADMIN_USER_NAME", cast=str, default='Admin User')
+ADMIN_USER_EMAIL=config("ADMIN_USER_EMAIL", cast=str, default=None)
+
+ADMINS=[]
+MANAGERS=[]
+
+if all([ADMIN_USER_EMAIL, ADMIN_USER_NAME]):
+    ADMINS +=[
+        (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
+    ]
+    MANAGERS = ADMINS
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/ 
