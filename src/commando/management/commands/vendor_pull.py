@@ -1,11 +1,10 @@
-import helpers.downloader as downloader
+import helpers
 
 from django.core.management.base import BaseCommand
 from typing import Any
 from django.conf import settings
 
 STATICFILES_VENDORS_DIR = getattr(settings, 'STATICFILES_VENDOR_DIR')
-print(STATICFILES_VENDORS_DIR)
 
 VENDOR_STATICFILES = {
     'flowbite.min.css': 'https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css',
@@ -22,7 +21,7 @@ class Command(BaseCommand):
 
         for name, url in VENDOR_STATICFILES.items():
             out_path = STATICFILES_VENDORS_DIR / name
-            dl_success = downloader.download_to_local(url, out_path)
+            dl_success = helpers.download_to_local(url, out_path)
             if dl_success:
                 completed_urls.append(url)
             else: 
@@ -34,7 +33,7 @@ class Command(BaseCommand):
         if set(completed_urls) == set(VENDOR_STATICFILES.values()):
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"Successfully downloaded {len(completed_urls)} vendor static files"
+                    f"Successfully downloaded {len(completed_urls)} vendor static files to {STATICFILES_VENDORS_DIR}"
                 )
             )
         else:
