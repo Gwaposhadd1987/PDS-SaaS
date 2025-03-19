@@ -29,7 +29,6 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 DJANGO_DEBUG = config('DJANGO_DEBUG', default=False, cast=bool) # False
 
-print('DEBUG', DJANGO_DEBUG, type(DJANGO_DEBUG))
 
 ALLOWED_HOSTS = [
     '.railway.app', # https://<project-name>.<environment-name>.railway.app
@@ -100,7 +99,7 @@ DATABASES = {
 }
 
 CONN_MAX_AGE = config('CONN_MAX_AGE', cast=int, default=300)
-DATABASE_URL = config('DATABASE_URL', cast=str)
+DATABASE_URL = config('DATABASE_URL', default=None)
 
 if DATABASE_URL is not None:
     import dj_database_url
@@ -149,6 +148,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_BASE_DIR = BASE_DIR / 'staticfiles'
+STATICFILES_BASE_DIR.mkdir(exist_ok=True, parents=True)
 STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / 'vendors'
 
 # source(s) for python manage.py collectstatic
