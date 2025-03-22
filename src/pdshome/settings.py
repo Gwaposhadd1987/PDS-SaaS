@@ -50,6 +50,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # DEBUG = str(os.environ.get('DEBUG', False)).lower() == "true"
 
 DJANGO_DEBUG = config('DJANGO_DEBUG', default=False, cast=bool) # False
+print(f"DJANGO_DEBUG: {DJANGO_DEBUG}")
 
 
 ALLOWED_HOSTS = [

@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from auth import views as auth_views
 from .views import test_home_view, old_home_view, home_view, about_view
 
 urlpatterns = [
     
     path('', old_home_view), # index page --> root page
     path('home/', home_view),
+    path('login/', auth_views.login_view),
+    path('register/', auth_views.register_view),
     path('about/', about_view),
     path('test-home/', test_home_view), # the home_page_view function is used as a callback handler
     path('admin/', admin.site.urls),
